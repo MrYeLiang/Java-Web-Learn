@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<mapper namespace="main.java.mybatis.mapper.BrandMapper">
+    <select id="selectAll" resultType="brand">
+        select *
+        from tb_brand;
+    </select>
+</mapper>

@@ -1,0 +1,26 @@
+drop table if exists tb_brand;
+
+-- 创建表tb_brand
+create table tb_brand(
+    id int primary key auto_increment,
+    brand_name varchar(20),
+    company_name varchar(20),
+    ordered int,
+    description varchar(100),
+    status int
+);
+
+-- 添加数据
+insert into tb_brand (brand_name, company_name, ordered, description, status)
+values('三只松鼠', '三鼠公司', 5, '好吃不贵', '0'),
+('华为', '华为数科', 120, '提供高端科技', '1'),
+('三只松鼠', '三鼠公司', 50, '美好的事即将发生', '1');
+
+-- 更新数据
+update tb_brand
+set brand_name = ?,
+company_name = ?,
+ordered = ?,
+description = ?,
+status = ?
+where id = ?;

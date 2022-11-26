@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <script>
+    //1 匹配单词或者数字，位数: 6~12
+    let regName = /^\w{6,12}$/
+
+    let str1 = "adcab";
+    let str2 = "adcaba";
+    let flag1 = regName.test(str1)
+    let flag2 = regName.test(str2)
+    console.log("flag1 = " + flag1 + ", flag2 = " + flag2);
+
+    //2 匹配手机号
+    var regPhone = /^[1]\d{10}$/
+    let phoneNum1 = 13115158971;
+    let phoneNum2 = 1311515891;
+
+    let fitPhone1 = regPhone.test(phoneNum1);
+    let fitPhone2 = regPhone.test(phoneNum2);
+    console.log("fitPhone1 = " + fitPhone1 + ", fitPhone2 = " + fitPhone2);
+  </script>
+</body>
+</html>

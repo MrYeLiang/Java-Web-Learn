@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>欢迎注册</title>
+  <link href="">
+</head>
+<body>
+<div class="form-div">
+  <div class="reg-content">
+    <h2>欢迎注册</h2>
+    <span>已有账号</span> <a href="#">登录</a>
+  </div>
+  <form id="reg-form" action="#" method="get">
+    <table>
+      <tr>
+        <td>用户名</td>
+        <td class="inputs">
+          <input name="username" type="text" id="username"><br>
+          <span id="username_err" class="err_msg" style="display:none">用户名非法</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>密码</td>
+        <td class="inputs">
+          <input name="password" type="password" id="password"><br>
+          <span id="password_err" class="err_msg" style="display: none">密码格式错误</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>手机号</td>
+        <td class="inputs">
+            <input name="tel" type="text" id="tel"><br>
+            <span id="tel_err" class = "err_msg" style = "display:none">手机号格式有误</span>
+        </td>
+      </tr>
+    </table>
+
+    <div class="buttons">
+      <input value="注册" type="submit" id="reg_btn">
+    </div>
+    <br class="clear">
+  </form>
+</div>
+
+<script>
+  /*用户名校验*/
+  var usernameInput = document.getElementById("username");
+  usernameInput.onblur = checkUsername;
+  function checkUsername() {
+    var username = usernameInput.value.trim();
+    var fit = username.length >= 6 && username.length <= 12;
+    if (fit) {
+      document.getElementById("username_err").style.display = "none";
+    } else {
+      document.getElementById("username_err").style.display = '';
+    }
+
+    console.log("checkUsername fit = " + fit);
+    return fit;
+  }
+
+  /*密码校验*/
+  let passwordInput = document.getElementById("password");
+  passwordInput.onblur = checkPwd;
+  function checkPwd() {
+    let password = passwordInput.value.trim();
+    let fit = password.length >= 6 && password.length <= 12;
+    console.log(password.length >= 6)
+    if (fit)  {
+      document.getElementById("password_err").style.display = 'none';
+    } else {
+      document.getElementById("password_err").style.display = '';
+    }
+    console.log("checkPwd fit = " + fit);
+    return fit;
+  }
+
+  /*手机号校验*/
+  let telInput = document.getElementById("tel");
+  telInput.onblur = checkPhone;
+  function checkPhone() {
+    let tel = telInput.value.trim();
+    let fit = tel.length === 11;
+    if (fit) {
+      document.getElementById("tel_err").style.display = 'none';
+    } else {
+      document.getElementById("tel_err").style.display = '';
+    }
+    console.log("checkPhone fit = " + fit);
+    return fit;
+  }
+
+  /*表单校验*/
+  let regForm = document.getElementById("reg-form");
+  regForm.onsubmit = function () {
+    let flag = checkUsername() && checkPhone() && checkPwd();
+    return flag;
+  }
+
+</script>
+</body>
+</html>
