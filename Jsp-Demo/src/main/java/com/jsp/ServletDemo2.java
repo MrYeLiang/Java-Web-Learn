@@ -9,19 +9,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/demo1")
-public class ServletDemo1 extends HttpServlet {
-
+@WebServlet("/demo2")
+public class ServletDemo2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("ServletDemo1 doGet");
-        List<Brand> brandList = new ArrayList();
+        //将数据存储到request域中
+        req.setAttribute("status", 1);
+
+        List<Brand> brandList = new ArrayList<>();
         brandList.add(new Brand(1, "华为", "华为", 200, "5G厂商", 1));
         brandList.add(new Brand(2, "比亚迪", "比亚迪", 300, "国产电车", 1));
         brandList.add(new Brand(3, "茅台", "茅台", 400, "白酒酱香", 1));
 
         req.setAttribute("brands", brandList);
-        req.getRequestDispatcher("/el-demo.jsp").forward(req, resp);
+
+        //转发到jstl-if.jsp中
+        req.getRequestDispatcher("/jstl.jsp").forward(req, resp);
     }
 
     @Override
