@@ -13,6 +13,7 @@
 </head>
 <body>
   <hr>
+  <input type="button" value="新增" id="add"><br>
   <table border="1" cellspacing="0" width="80%">
     <tr>
         <th>序号</th>
@@ -45,4 +46,9 @@
       </c:forEach>
   </table>
 </body>
+    <script>
+        document.getElementById("add").onclick = function () {
+            location.href = "/Mvc-Demo/addBrand.jsp"
+        }
+    </script>
 </html>

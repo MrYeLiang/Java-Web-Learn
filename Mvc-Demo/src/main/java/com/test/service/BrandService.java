@@ -20,4 +20,13 @@ public class BrandService {
         sqlSession.close();
         return brands;
     }
+
+    public void add(Brand brand) {
+        SqlSession sqlSession = factory.openSession();
+        BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+
+        mapper.add(brand);
+        sqlSession.commit();
+        sqlSession.close();
+    }
 }
