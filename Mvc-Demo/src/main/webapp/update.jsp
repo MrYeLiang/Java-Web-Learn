@@ -15,6 +15,7 @@
 <body>
     <h3>修改品牌信息</h3>
     <form action="/Mvc-Demo/updateServlet" method="post">
+        <input type="hidden" name="id" value="${brand.id}"><br>
         品牌名称: <input name="brandName" value="${brand.brandName}"><br> <br>
         企业名称: <input name="companyName" value="${brand.companyName}"><br> <br>
         品牌排序: <input name="ordered" value="${brand.ordered}"><br> <br>

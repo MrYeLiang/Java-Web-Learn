@@ -40,4 +40,15 @@ public class BrandService {
 
         return brand;
     }
+
+    public void update(Brand brand) {
+        SqlSession sqlSession = factory.openSession();
+        BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+
+        System.out.println("update brand = " + brand);
+        mapper.update(brand);
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
 }
