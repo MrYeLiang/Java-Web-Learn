@@ -29,4 +29,15 @@ public class BrandService {
         sqlSession.commit();
         sqlSession.close();
     }
+
+    public Brand selectById(int id) {
+        SqlSession sqlSession = factory.openSession();
+        BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+
+        Brand brand = mapper.selectById(id);
+        sqlSession.commit();
+        sqlSession.close();
+
+        return brand;
+    }
 }

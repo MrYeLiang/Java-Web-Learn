@@ -39,7 +39,7 @@
                   <td>禁用</td>
               </c:if>
               <td>
-                  <a href="/mvc-demo/selectByidServlet?id=${brand.id}">修改
+                  <a href="/Mvc-Demo/selectByIdServlet?id=${brand.id}">修改
                   </a> <a href="#"> 删除</a>
               </td>
           </tr>
