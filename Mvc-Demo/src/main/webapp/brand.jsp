@@ -12,6 +12,7 @@
     <title>所有品牌</title>
 </head>
 <body>
+  <h1>${user.username},欢迎您</h1>
   <hr>
   <input type="button" value="新增" id="add"><br>
   <table border="1" cellspacing="0" width="80%">

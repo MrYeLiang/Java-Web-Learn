@@ -35,6 +35,7 @@
     <mappers>
         <!--加载sql映射文件-->
         <mapper resource="com.test.mapper/BrandMapper.xml"/>
+        <mapper resource="com.test.mapper/UserMapper.xml"/>
     </mappers>
 
 
