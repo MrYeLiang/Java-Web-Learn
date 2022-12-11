@@ -13,11 +13,11 @@
     <form action="/Mvc-Demo/loginServlet" id="form" method="post">
         <h1 id="loginMsg">LOGIN IN</h1>
         <div id="errorMsg">${login_msg}</div>
-        <p>Username:<input id="username" name="username" type="text"></p>
+        <p>Username:<input id="username" name="username" type="text" value="${cookie.username.value}"></p>
 
-        <p>Password:<input id="password" name="password" type="password"></p>
+        <p>Password:<input id="password" name="password" type="password" value="${cookie.password.value}"></p>
 
-        <p>Remember:<input id="remember" name="remember" type="checkbox"></p>
+        <p>Remember:<input id="remember" name="remember" type="checkbox" value="1"></p>
         <div id="subDiv">
             <input type="submit" class="button" value="login up">
             <input type="reset" class="button" value="reset">&nbsp;&nbsp;&nbsp;
