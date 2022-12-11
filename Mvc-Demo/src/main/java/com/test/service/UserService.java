@@ -18,4 +18,17 @@ public class UserService {
         sqlSession.close();
         return user;
     }
+
+    public boolean register(User user) {
+        SqlSession sqlSession = factory.openSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User u = mapper.selectByUsername(user.getUsername());
+
+        if (u == null) {
+            mapper.add(user);
+            sqlSession.commit();
+        }
+
+        return u == null;
+    }
 }
