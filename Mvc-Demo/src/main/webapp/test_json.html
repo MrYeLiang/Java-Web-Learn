@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <script>
+    var jsonStr = '{"name" : "lisi", "age" : 15, "city" : "上海"}'
+    var jsonObj = JSON.parse(jsonStr);
+    console.log("name = " + jsonObj.name + ", age = " + jsonObj.age)
+
+    let jsonStr2 = JSON.stringify(jsonObj)
+    console.log("jsonStr2 = " + jsonStr2);
+
+    var jsObject = {name: "lisi"}
+    axios({
+        method:"post",
+        url: "http://localhost:8080/Mvc-Demo/axiosServlet",
+        data: jsObject
+    }).then(function (resp) {
+        console.log("resp.data = " + resp.data)
+    })
+  </script>
+</body>
+</html>
