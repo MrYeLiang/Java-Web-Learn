@@ -15,7 +15,7 @@
   <h1>${user.username},欢迎您</h1>
   <hr>
   <input type="button" value="新增" id="add"><br>
-  <table border="1" cellspacing="0" width="80%">
+  <table id="brandTable" border="1" cellspacing="0" width="80%">
     <tr>
         <th>序号</th>
         <th>品牌名称</th>
@@ -25,31 +25,46 @@
         <th>状态</th>
         <th>操作</th>
     </tr>
-      <c:forEach items="${brands}" var="brand" varStatus="status">
-          <tr align="center">
-              <td>${status.count}</td>
-              <td>${brand.brandName}</td>
-              <td>${brand.companyName}</td>
-              <td>${brand.ordered}</td>
-              <td>${brand.description}</td>
-              <c:if test="${brand.status == 1}">
-                  <td>启用</td>
-              </c:if>
-
-               <c:if test="${brand.status != 1}">
-                  <td>禁用</td>
-              </c:if>
-              <td>
-                  <a href="/Mvc-Demo/selectByIdServlet?id=${brand.id}">修改
-                  </a> <a href="#"> 删除</a>
-              </td>
-          </tr>
-      </c:forEach>
   </table>
+  <script src="js/axios-0.18.0.js"></script>
+  <script>
+      window.onload = function () {
+          axios({
+              method: "get",
+              url: "http://localhost:8080/Mvc-Demo/selectAllServlet"
+          }).then(function (resp) {
+              let brands = resp.data;
+              let tableData = "<tr>\n" +
+                  "   <th>序号</th>\n" +
+                  "   <th>品牌名称</th>\n" +
+                  "   <th>企业名称</th>\n" +
+                  "   <th>排序</th>\n" +
+                  "    <th>品牌介绍</th>\n" +
+                  "    <th>状态</th>\n" +
+                  "   <th>操作</th>\n" +
+                  "</tr>";
+
+              for (let i = 0; i < brands.length; i++) {
+                  let brand = brands[i];
+
+                  tableData += "<tr align=\"center\">\n" +
+                      "              <td>" + (i + 1) + "</td>\n" +
+                      "              <td>" + brand.brandName + "</td>\n" +
+                      "              <td>" + brand.companyName + "</td>\n" +
+                      "              <td>" + brand.ordered + "</td>\n" +
+                      "              <td>" + brand.description + "</td>\n" +
+                      "              <td>" + brand.status + "</td>\n" +
+                      "              <td>\n" +
+                      "                  <a href=\"/Mvc-Demo/selectByIdServlet?id=${brand.id}\">修改\n" +
+                      "                  </a> <a href=\"#\"> 删除</a>\n" +
+                      "              </td>\n" +
+                      "          </tr>";
+              }
+              document.getElementById("brandTable").innerHTML = tableData;
+          })
+      }
+  </script>
 </body>
-    <script>
-        document.getElementById("add").onclick = function () {
-            location.href = "/Mvc-Demo/addBrand.jsp"
-        }
-    </script>
 </html>
+
+

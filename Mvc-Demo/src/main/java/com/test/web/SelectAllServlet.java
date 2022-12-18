@@ -1,5 +1,6 @@
 package com.test.web;
 
+import com.alibaba.fastjson.JSON;
 import com.test.pojo.Brand;
 import com.test.service.BrandService;
 
@@ -18,8 +19,10 @@ public class SelectAllServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Brand> brands = service.selectAll();
-        req.setAttribute("brands", brands);
-        req.getRequestDispatcher("/brand.jsp").forward(req, resp);
+
+        String jsonStr = JSON.toJSONString(brands);
+        resp.setContentType("text/json; charset=utf-8");
+        resp.getWriter().write(jsonStr);
     }
 
     @Override
