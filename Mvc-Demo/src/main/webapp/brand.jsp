@@ -14,7 +14,7 @@
 <body>
   <h1>${user.username},欢迎您</h1>
   <hr>
-  <input type="button" value="新增" id="add"><br>
+  <a href="addBrand.jsp"> <input type="button" value="新增"></a><br>
   <table id="brandTable" border="1" cellspacing="0" width="80%">
     <tr>
         <th>序号</th>
@@ -66,5 +66,7 @@
   </script>
 </body>
 </html>
+
+
 
 
