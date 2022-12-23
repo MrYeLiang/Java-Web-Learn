@@ -34,7 +34,7 @@
               <td>{{brand.companyName}}</td>
               <td>{{brand.ordered}}</td>
               <td>{{brand.description}}</td>
-              <td>{{brand.statusStr}}</td>
+              <td>{{brand.status}}</td>
               <td><a href="#">修改</a> <a href="#">删除</a> </td>
           </tr>
       </table>
