@@ -14,55 +14,51 @@
 <body>
   <h1>${user.username},欢迎您</h1>
   <hr>
-  <a href="addBrand.jsp"> <input type="button" value="新增"></a><br>
-  <table id="brandTable" border="1" cellspacing="0" width="80%">
-    <tr>
-        <th>序号</th>
-        <th>品牌名称</th>
-        <th>企业名称</th>
-        <th>排序</th>
-        <th>品牌介绍</th>
-        <th>状态</th>
-        <th>操作</th>
-    </tr>
-  </table>
+
+  <div id="app">
+      <a href="addBrand.jsp"> <input type="button" value="新增"></a><br>
+      <br>
+      <table id="brandTable" border="1" cellspacing="0" width="80%">
+          <tr>
+              <th>序号</th>
+              <th>品牌名称</th>
+              <th>企业名称</th>
+              <th>排序</th>
+              <th>品牌介绍</th>
+              <th>状态</th>
+              <th>操作</th>
+          </tr>
+          <tr v-for="(brand, i) in brands" align="center">
+              <td>{{i + 1}}</td>
+              <td>{{brand.brandName}}</td>
+              <td>{{brand.companyName}}</td>
+              <td>{{brand.ordered}}</td>
+              <td>{{brand.description}}</td>
+              <td>{{brand.statusStr}}</td>
+              <td><a href="#">修改</a> <a href="#">删除</a> </td>
+          </tr>
+      </table>
+  </div>
   <script src="js/axios-0.18.0.js"></script>
+  <script src="js/vue.js"></script>
   <script>
-      window.onload = function () {
-          axios({
-              method: "get",
-              url: "http://localhost:8080/Mvc-Demo/selectAllServlet"
-          }).then(function (resp) {
-              let brands = resp.data;
-              let tableData = "<tr>\n" +
-                  "   <th>序号</th>\n" +
-                  "   <th>品牌名称</th>\n" +
-                  "   <th>企业名称</th>\n" +
-                  "   <th>排序</th>\n" +
-                  "    <th>品牌介绍</th>\n" +
-                  "    <th>状态</th>\n" +
-                  "   <th>操作</th>\n" +
-                  "</tr>";
-
-              for (let i = 0; i < brands.length; i++) {
-                  let brand = brands[i];
-
-                  tableData += "<tr align=\"center\">\n" +
-                      "              <td>" + (i + 1) + "</td>\n" +
-                      "              <td>" + brand.brandName + "</td>\n" +
-                      "              <td>" + brand.companyName + "</td>\n" +
-                      "              <td>" + brand.ordered + "</td>\n" +
-                      "              <td>" + brand.description + "</td>\n" +
-                      "              <td>" + brand.status + "</td>\n" +
-                      "              <td>\n" +
-                      "                  <a href=\"/Mvc-Demo/selectByIdServlet?id=${brand.id}\">修改\n" +
-                      "                  </a> <a href=\"#\"> 删除</a>\n" +
-                      "              </td>\n" +
-                      "          </tr>";
-              }
-              document.getElementById("brandTable").innerHTML = tableData;
-          })
-      }
+     new Vue({
+         el: "#app",
+         data() {
+             return {
+                 brands:[]
+             }
+         },
+         mounted() {
+             var _this = this;
+             axios ({
+                 method: "get",
+                 url : "http://localhost:8080/Mvc-Demo/selectAllServlet"
+             }).then(function (resp) {
+                 _this.brands = resp.data;
+             })
+         }
+     })
   </script>
 </body>
 </html>
