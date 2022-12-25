@@ -49,7 +49,7 @@
         </el-form>
     </el-dialog>
 
-<%-- 搜索表单 --%>
+    <%-- 搜索表单 --%>
     <el-form :inline="true" :model="brand" class="demo-form-inline">
         <el-form-item label="状态">
             <el-select v-model="brand.status" placeholder="状态">
@@ -125,6 +125,17 @@
             </el-table-column>
         </el-table>
     </template>
+
+    <%-- 分页 --%>
+    <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage4"
+            :page-sizes="[100, 200, 300, 400]"
+            :page-size="100"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="400">
+    </el-pagination>
 </div>
 
 <script src="../js/vue.js"></script>
@@ -155,6 +166,15 @@
             },
             addBrand() {
                 console.log(this.brand)
+            },
+
+            //分页
+            handleSizeChange(val) {
+                console.log(`每页${val}条`);
+            },
+
+            handleCurrentChange(val) {
+                console.log(`当前页:${val}`);
             }
         },
         data() {
