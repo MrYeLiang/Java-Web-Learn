@@ -35,11 +35,18 @@
             </el-form-item>
 
             <el-form-item label="排序">
-                <el-input v-model="brand.order"></el-input>
+                <el-input v-model="brand.ordered"></el-input>
             </el-form-item>
 
             <el-form-item label="产品描述">
                 <el-input type="textarea" v-model="brand.description"></el-input>
+            </el-form-item>
+
+            <el-form-item label="状态">
+                <el-switch v-model="brand.status"
+                           active-value="1"
+                           inactive-value="0">
+                </el-switch>
             </el-form-item>
 
             <el-form-item>
@@ -100,7 +107,7 @@
             </el-table-column>
 
             <el-table-column
-                    prop="order"
+                    prop="ordered"
                     label="排序"
                     width="180"
                     align="center">
@@ -166,7 +173,23 @@
                 console.log(this.brand);
             },
             addBrand() {
-                console.log(this.brand)
+                var _this = this;
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/Mvc-Demo/addServlet",
+                    data: _this.brand
+                }).then(function (resp) {
+                    if (resp.data == "success") {
+                        _this.dialogVisible = false;
+                        _this.selectAll();
+
+                        _this.$message({
+                            message:'添加成功',
+                            type:'success'
+                        })
+                    }
+                    console.log("data = " + resp.data)
+                })
             },
 
             //分页
@@ -176,6 +199,15 @@
 
             handleCurrentChange(val) {
                 console.log(`当前页:${val}`);
+            },
+            selectAll() {
+                var _this = this;
+                axios({
+                    method: "get",
+                    url: "http://localhost:8080/Mvc-Demo/selectAllServlet"
+                }).then(function (resp) {
+                    _this.tableData = resp.data;
+                })
             }
         },
         data() {
@@ -215,13 +247,7 @@
             }
         },
         mounted() {
-            var _this = this;
-            axios({
-                method: "get",
-                url:"http://localhost:8080/Mvc-Demo/selectAllServlet"
-            }).then(function(resp){
-                _this.tableData = resp.data;
-            })
+            this.selectAll();
         }
     })
 </script>
