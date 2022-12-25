@@ -130,7 +130,7 @@
     <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="currentPage4"
+            :current-page="currentPage"
             :page-sizes="[100, 200, 300, 400]"
             :page-size="100"
             layout="total, sizes, prev, pager, next, jumper"
@@ -138,6 +138,7 @@
     </el-pagination>
 </div>
 
+<script src="../js/axios-0.18.0.js"></script>
 <script src="../js/vue.js"></script>
 <script src="../element-ui/lib/index.js"></script>
 <link rel="stylesheet" href="../element-ui/lib/theme-chalk/index.css">
@@ -180,6 +181,7 @@
         data() {
             return {
                 dialogVisible: false,
+                currentPage: 1,
                 //搜索品牌
                 brand: {
                     status: '',
@@ -211,6 +213,15 @@
                     status: '1'
                 }]
             }
+        },
+        mounted() {
+            var _this = this;
+            axios({
+                method: "get",
+                url:"http://localhost:8080/Mvc-Demo/selectAllServlet"
+            }).then(function(resp){
+                _this.tableData = resp.data;
+            })
         }
     })
 </script>
