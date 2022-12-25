@@ -21,6 +21,30 @@
 </head>
 <body>
 <div id="app">
+    <%-- 搜索表单 --%>
+        <el-form :inline="true" :model="brand" class="demo-form-inline">
+            <el-form-item label="状态">
+                <el-select v-model="brand.status" placeholder="状态">
+                    <el-option label="启用" value="1"></el-option>
+                    <el-option label="禁用" value="0"></el-option>
+                </el-select>
+            </el-form-item>
+
+            <el-form-item label="企业名称">
+                <el-input v-model="brand.companyName" placeholder="品牌名称"></el-input>
+            </el-form-item>
+
+            <el-form-item label="品牌名称">
+                <el-input v-model="brand.brandName" placeholder="品牌名称"></el-input>
+            </el-form-item>
+
+            <el-form-item>
+                <el-button type="primary" @click="onSubmit">查询</el-button>
+            </el-form-item>
+        </el-form>
+
+
+    <%-- 表格 --%>
     <template>
         <el-table
                 :data="tableData"
@@ -92,12 +116,28 @@
                 }
                 return '';
             },
-            handleSelectChange(val) {
+
+            //复选框选中后回调方法
+            handleSelectionChange(val) {
                 this.multipleSelection = val;
+                console.log(this.multipleSelection)
+            },
+
+            onSubmit() {
+                console.log(this.brand);
             }
         },
         data() {
             return {
+                //搜索品牌
+                brand: {
+                  status: '',
+                  brandName: '',
+                  companyName: '',
+                  id:'',
+                  ordered: '',
+                  description: ""
+                },
                 tableData: [{
                     brandName: '大众',
                     companyName: '上海大众',
