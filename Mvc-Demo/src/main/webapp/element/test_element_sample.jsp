@@ -21,28 +21,55 @@
 </head>
 <body>
 <div id="app">
-    <%-- 搜索表单 --%>
-        <el-form :inline="true" :model="brand" class="demo-form-inline">
-            <el-form-item label="状态">
-                <el-select v-model="brand.status" placeholder="状态">
-                    <el-option label="启用" value="1"></el-option>
-                    <el-option label="禁用" value="0"></el-option>
-                </el-select>
+    <%--Dialog Form--%>
+    <el-button type="text" @click="dialogVisible = true">品牌添加</el-button>
+
+    <el-dialog title="编辑品牌" :visible.sync="dialogVisible" width="30%">
+        <el-form ref="form" :model="brand" label-width="80px">
+            <el-form-item label="品牌名称">
+                <el-input v-model="brand.brandName"></el-input>
             </el-form-item>
 
             <el-form-item label="企业名称">
-                <el-input v-model="brand.companyName" placeholder="品牌名称"></el-input>
+                <el-input v-model="brand.companyName"></el-input>
             </el-form-item>
 
-            <el-form-item label="品牌名称">
-                <el-input v-model="brand.brandName" placeholder="品牌名称"></el-input>
+            <el-form-item label="排序">
+                <el-input v-model="brand.order"></el-input>
+            </el-form-item>
+
+            <el-form-item label="产品描述">
+                <el-input type="textarea" v-model="brand.description"></el-input>
             </el-form-item>
 
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">查询</el-button>
+                <el-button type="primary" @click="addBrand">提 交</el-button>
+                <el-button @click="dialogVisible = false">取 消</el-button>
             </el-form-item>
         </el-form>
+    </el-dialog>
 
+<%-- 搜索表单 --%>
+    <el-form :inline="true" :model="brand" class="demo-form-inline">
+        <el-form-item label="状态">
+            <el-select v-model="brand.status" placeholder="状态">
+                <el-option label="启用" value="1"></el-option>
+                <el-option label="禁用" value="0"></el-option>
+            </el-select>
+        </el-form-item>
+
+        <el-form-item label="企业名称">
+            <el-input v-model="brand.companyName" placeholder="品牌名称"></el-input>
+        </el-form-item>
+
+        <el-form-item label="品牌名称">
+            <el-input v-model="brand.brandName" placeholder="品牌名称"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">查询</el-button>
+        </el-form-item>
+    </el-form>
 
     <%-- 表格 --%>
     <template>
@@ -125,18 +152,22 @@
 
             onSubmit() {
                 console.log(this.brand);
+            },
+            addBrand() {
+                console.log(this.brand)
             }
         },
         data() {
             return {
+                dialogVisible: false,
                 //搜索品牌
                 brand: {
-                  status: '',
-                  brandName: '',
-                  companyName: '',
-                  id:'',
-                  ordered: '',
-                  description: ""
+                    status: '',
+                    brandName: '',
+                    companyName: '',
+                    id: '',
+                    ordered: '',
+                    description: ""
                 },
                 tableData: [{
                     brandName: '大众',
