@@ -39,7 +39,7 @@
             </el-form-item>
 
             <el-form-item label="产品描述">
-                <el-input type="textarea" v-model="brand.description"></el-input>
+                <el-input v-model="brand.description"></el-input>
             </el-form-item>
 
             <el-form-item label="状态">
@@ -116,6 +116,13 @@
             <el-table-column
                     prop="status"
                     label="状态"
+                    width="180"
+                    align="center">
+            </el-table-column>
+
+            <el-table-column
+                    prop="description"
+                    label="描述"
                     width="180"
                     align="center">
             </el-table-column>
